@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/NikprogBackend/ClientApp/.angular/cache/14.0.3/angular-webpack/24af01d0e78c349109a4accb18ef6d298bff4737
+/NikprogBackend/ClientApp/.angular/cache/14.0.3/babel-webpack
