@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NikprogBackend.Data;
-using NikprogBackend.Models;
+using NikprogBackend.Models.UserHandling;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +21,7 @@ builder.Services.AddIdentity<NikprogUser, IdentityRole>(
         options =>
         {
             options.Password.RequireDigit = false;
-            options.Password.RequiredLength = 6;
+            options.Password.RequiredLength = 0;
             options.Password.RequireLowercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
