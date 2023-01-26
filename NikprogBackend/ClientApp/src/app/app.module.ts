@@ -7,21 +7,20 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { SwaggerComponent } from './swagger/swagger.component';
+import { LoginComponent } from './login/login.component';
+import { MicrosoftLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    SwaggerComponent
+    SwaggerComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,14 +29,37 @@ import { SwaggerComponent } from './swagger/swagger.component';
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      //{ path: 'home', redirectTo: '/', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'logout', component: LogoutComponent },
       { path: 'swagger', component: SwaggerComponent },
       { path: '**', redirectTo: '/', pathMatch: 'full' }
     ])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    /*{ provide: MAT_DATE_LOCALE, useValue: 'hu-HU' },*/
+
+    {// ToDo: Somehow force it to redirect mode instead of popup mode ( in abacritt/angularx-social-login I did not found options for it)
+      // Problem with login: somethimes it automatically authenticates the user, so we can not chose or switch between users.
+      // Problem with logout: it logs the user out of every o365 authed apps.
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: MicrosoftLoginProvider.PROVIDER_ID,
+            provider: new MicrosoftLoginProvider(
+              'feede3dd-2323-4aa4-b0c9-6a3608ccb9d8', {
+              authority: 'https://login.microsoftonline.com/1d6a56fa-705a-4bbc-8004-67a21d5e9b97',
+              redirect_uri: 'https://localhost:44431'
+            })
+          }
+        ],
+        onError: (err: String) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })
