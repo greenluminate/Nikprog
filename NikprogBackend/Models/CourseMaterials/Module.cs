@@ -19,8 +19,10 @@ namespace NikprogBackend.Models
         [MaxLength(100)]
         [Column("name")]
         public string? Name { get; set; }
-        //ToDO: model content class to manage videos and documents under one sequencenumbering / collection
-        //ToDo front-end: Can I get the video sequence number from the first char of the video name?
+
+        [Required]
+        [ForeignKey(nameof(Course))]
+        public int CourseId { get; set; }
 
         [NotMapped]
         [JsonIgnore]

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NikprogBackend.Models.CourseMaterials
 {
+    [Table("material_info")]
     public class MaterialInfo
     {
         [Key]
@@ -25,12 +26,15 @@ namespace NikprogBackend.Models.CourseMaterials
         [Column("url")]
         public string Url { get; set; }
 
+        [Required]
         [ForeignKey(nameof(Module))]
         public int ModuleId { get; set; }
 
         public MaterialInfo()
         {
             Id = Guid.NewGuid().ToString();
+            Url = "";
+            Title = "";
         }
     }
 }
