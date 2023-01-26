@@ -20,19 +20,23 @@ namespace NikprogBackend.Models
         [Column("name")]
         public string? Name { get; set; }
 
+        [NotMapped]
+        [JsonIgnore]
+        public virtual Course Course { get; set; }
+
         [Required]
         [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
 
         [NotMapped]
         [JsonIgnore]
-        public virtual ICollection<MaterialInfo> MaterialInfo { get; set; }
+        public virtual ICollection<MaterialInfo> MaterialInfos { get; set; }
 
         public Module()
         {
             Id = Guid.NewGuid().ToString();
             SequenceNum = 0;
-            MaterialInfo = new HashSet<MaterialInfo>();
+            MaterialInfos = new HashSet<MaterialInfo>();
         }
     }
 }

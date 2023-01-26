@@ -5,11 +5,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NikprogBackend.Models.UserHandling;
+using NikprogBackend.Models;
+using NikprogBackend.Models.CourseMaterials;
 
 namespace NikprogBackend.Data
 {
     public class NikprogDbContext : IdentityDbContext<IdentityUser>
     {
+        public virtual DbSet<NikprogUser> AppUsers { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<MaterialInfo> MaterialInfos { get; set; }
+
         public NikprogDbContext(DbContextOptions<NikprogDbContext> options)
             : base(options)
         {
@@ -18,21 +25,19 @@ namespace NikprogBackend.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            PasswordHasher<NikprogUser> pwHasher = new PasswordHasher<NikprogUser>();
+            //PasswordHasher<NikprogUser> pwHasher = new PasswordHasher<NikprogUser>();
 
             NikprogUser moni = new NikprogUser
             {
                 Id = Guid.NewGuid().ToString(),
-                BirthDate = new DateTime(1991, 5, 25),
-                Sex = Sex.male,
-                Email = "0monika01@gmail.com",
-                EmailConfirmed = true,
+                Email = "q4nisq@stud.uni-obuda.hu",
                 FirstName = "Mónika",
                 LastName = "Tóth",
-                UserName = "0monika01@gmail.com",
-                NormalizedUserName = "0MONIKA01@GMAIL.COM"
+                UserName = "q4nisq@stud.uni-obuda.hu",
+                NormalizedUserName = "Q4NSIQ@STUD.UNI-OBUDA.HU",
+                LoginMode = LoginMode.microsoft
             };
-            moni.PasswordHash = pwHasher.HashPassword(moni, "Almafa123"); //Environment.GetEnvironmentVariable("NIKPROG_ADMIN_PW");
+            //moni.PasswordHash = pwHasher.HashPassword(moni, "Almafa123"); //Environment.GetEnvironmentVariable("NIKPROG_ADMIN_PW");
 
             builder.Entity<NikprogUser>().HasData(moni);
 
@@ -47,6 +52,18 @@ namespace NikprogBackend.Data
                 RoleId = "1",
                 UserId = moni.Id
             });
+
+            builder.Entity<Course>()
+               .HasMany(c => c.Modules)
+               .WithOne(m => m.Course)
+               .HasForeignKey(m => m.CourseId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Module>()
+                .HasMany(m => m.MaterialInfos)
+                .WithOne(mat => mat.Module)
+                .HasForeignKey(mat => mat.ModuleId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(builder);
         }

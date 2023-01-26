@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace NikprogBackend.Models.CourseMaterials
 {
@@ -25,6 +26,10 @@ namespace NikprogBackend.Models.CourseMaterials
         [MaxLength(200)]
         [Column("url")]
         public string Url { get; set; }
+
+        [NotMapped]
+        [JsonIgnore]
+        public virtual Module Module { get; set; }
 
         [Required]
         [ForeignKey(nameof(Module))]
