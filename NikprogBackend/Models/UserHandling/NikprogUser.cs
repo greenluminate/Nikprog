@@ -19,10 +19,10 @@ namespace NikprogBackend.Models.UserHandling
         // Email is inherited
 
         [StringLength(100)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [StringLength(100)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [StringLength(100)]
         public string? Location { get; set; }
