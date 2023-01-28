@@ -20,7 +20,7 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a *ngIf="this.userService.isLoggedIn()" class="nav-link text-dark" [routerLink]="['/']"></a>
+            <a *ngIf="this.userService.isLoggedIn()" class="nav-link text-dark" [routerLink]="['/courses']">Courses</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>

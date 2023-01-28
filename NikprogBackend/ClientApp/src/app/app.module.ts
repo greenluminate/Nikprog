@@ -12,6 +12,8 @@ import { SwaggerComponent } from './swagger/swagger.component';
 import { LoginComponent } from './login/login.component';
 import { MicrosoftLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { LogoutComponent } from './logout/logout.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CourseDetailsComponent } from './course-details/course-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { LogoutComponent } from './logout/logout.component';
     HomeComponent,
     SwaggerComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    CoursesComponent,
+    CourseDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,6 +36,8 @@ import { LogoutComponent } from './logout/logout.component';
       //{ path: 'home', redirectTo: '/', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
+      { path: 'courses', component: CoursesComponent },
+      { path: 'course/:id', component: CourseDetailsComponent },
       { path: 'swagger', component: SwaggerComponent },
       { path: '**', redirectTo: '/', pathMatch: 'full' }
     ])
