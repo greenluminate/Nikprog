@@ -1,4 +1,4 @@
-﻿namespace NikprogBackend.Services
+﻿namespace NikprogServerClient.Services
 {
     public class RestService
     {
@@ -35,7 +35,7 @@
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
 
-            T? item = default(T);
+            T? item = default;
             HttpResponseMessage? response = client?.GetAsync(endpoint).GetAwaiter().GetResult();
             if (response != null && response.IsSuccessStatusCode)
             {
