@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using IdentityModel;
 using System.Reflection.Metadata;
+using Newtonsoft.Json.Converters;
 
-namespace NikprogBackend.Models
+namespace NikprogServerClient.Models.CourseMaterials
 {
     [Table("course")]
     public class Course
@@ -17,7 +18,7 @@ namespace NikprogBackend.Models
         public string? Name { get; set; }
         [Column("difficulty")]
         public DifficultyEnum? Difficulty { get; set; }
-        [MaxLength(255)]
+        [MaxLength(1500)]
         [Column("description")]
         public string? Description { get; set; }
 

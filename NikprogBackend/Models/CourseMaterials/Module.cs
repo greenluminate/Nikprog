@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using NikprogBackend.Models.CourseMaterials;
 
-namespace NikprogBackend.Models
+namespace NikprogServerClient.Models.CourseMaterials
 {
     [Table("module")]
     public class Module
@@ -15,6 +14,8 @@ namespace NikprogBackend.Models
         [Required]
         [Range(0, 100)]
         [Column("sequence_num")]
+        // Sequence in the course
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SequenceNum { get; set; }
         [MaxLength(100)]
         [Column("name")]
@@ -26,7 +27,7 @@ namespace NikprogBackend.Models
 
         [Required]
         [ForeignKey(nameof(Course))]
-        public int CourseId { get; set; }
+        public string CourseId { get; set; }
 
         [NotMapped]
         [JsonIgnore]

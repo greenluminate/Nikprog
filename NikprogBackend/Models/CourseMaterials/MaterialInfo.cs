@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace NikprogBackend.Models.CourseMaterials
+namespace NikprogServerClient.Models.CourseMaterials
 {
     [Table("material_info")]
     public class MaterialInfo
@@ -33,7 +33,7 @@ namespace NikprogBackend.Models.CourseMaterials
 
         [Required]
         [ForeignKey(nameof(Module))]
-        public int ModuleId { get; set; }
+        public string ModuleId { get; set; }
 
         public MaterialInfo()
         {
