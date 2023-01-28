@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using IdentityModel;
-using System.Reflection.Metadata;
-using Newtonsoft.Json.Converters;
 
 namespace NikprogServerClient.Models.CourseMaterials
 {

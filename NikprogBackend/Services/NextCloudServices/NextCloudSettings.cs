@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NextcloudApi;
-using static System.Net.WebRequestMethods;
 
 namespace NikprogServerClient.Services.NextCloudServices
 {

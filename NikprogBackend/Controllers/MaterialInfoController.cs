@@ -1,9 +1,4 @@
-﻿using NikprogBackend.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using System.Net.Sockets;
+﻿using Microsoft.AspNetCore.Mvc;
 using NikprogServerClient.Logic;
 using NikprogServerClient.Models.CourseMaterials;
 
