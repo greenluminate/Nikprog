@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "NikprogBackend": {
+    "NikprogServerClient": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "NikprogBackend:build:production"
+              "browserTarget": "NikprogServerClient:build:production"
             },
             "development": {
-              "browserTarget": "NikprogBackend:build:development",
+              "browserTarget": "NikprogServerClient:build:development",
               "proxyConfig": "proxy.conf.js"
             }
           },
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "NikprogBackend:build"
+            "browserTarget": "NikprogServerClient:build"
           }
         },
         "test": {
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "NikprogBackend"
+  "defaultProject": "NikprogServerClient"
 }

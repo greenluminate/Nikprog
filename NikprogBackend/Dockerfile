@@ -10,10 +10,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["NikprogBackend/NikprogServerClient.csproj", "NikprogBackend/"]
-RUN dotnet restore "NikprogBackend/NikprogServerClient.csproj"
+COPY ["NikprogServerClient/NikprogServerClient.csproj", "NikprogServerClient/"]
+RUN dotnet restore "NikprogServerClient/NikprogServerClient.csproj"
 COPY . .
-WORKDIR "/src/NikprogBackend"
+WORKDIR "/src/NikprogServerClient"
 RUN dotnet build "NikprogServerClient.csproj" -c Release -o /app/build
 
 FROM build AS publish
