@@ -1,4 +1,4 @@
-export const ApplicationName = 'NikprogBackend';
+export const ApplicationName = 'NikprogServerClient';
 
 export const ReturnUrlType = 'returnUrl';
 
