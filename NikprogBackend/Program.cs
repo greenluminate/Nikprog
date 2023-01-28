@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NikprogBackend.Data;
-using NikprogBackend.Models.UserHandling;
+using NikprogServerClient.Data;
+using NikprogServerClient.Logic;
+using NikprogServerClient.Models.CourseMaterials;
+using NikprogServerClient.Models.UserHandling;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,15 +52,33 @@ builder.Services.AddAuthentication(options =>
     options.RequireHttpsMetadata = true;
     options.TokenValidationParameters = new TokenValidationParameters()
     {
-        ValidateAudience = true,
         ValidateIssuer = true,
+        ValidateAudience = true,
         ValidAudience = builder.Configuration["Jwt:Site"],
         ValidIssuer = builder.Configuration["Jwt:Site"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]))
     };
 });
 
-builder.Services.AddControllersWithViews();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(opts =>
+    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+    );
+
+builder.Services.AddScoped<ICRUDLogic<Course>, CRUDLogic<Course>>();
+builder.Services.AddScoped<ICRUDLogic<Module>, CRUDLogic<Module>>();
+builder.Services.AddScoped<ICRUDLogic<MaterialInfo>, CRUDLogic<MaterialInfo>>();
+builder.Services.AddScoped<ICRUDLogic<MessageInfo>, CRUDLogic<MessageInfo>>();
+builder.Services.AddScoped<ICRUDLogic<VideoInfo>, CRUDLogic<VideoInfo>>();
+builder.Services.AddScoped<ICRUDLogic<DocumentInfo>, CRUDLogic<DocumentInfo>>();
+
+builder.Services.AddTransient<ICRUDRepository<Course>, CRUDRepository<Course>>();
+builder.Services.AddTransient<ICRUDRepository<Module>, CRUDRepository<Module>>();
+builder.Services.AddTransient<ICRUDRepository<MaterialInfo>, CRUDRepository<MaterialInfo>>();
+builder.Services.AddTransient<ICRUDRepository<MessageInfo>, CRUDRepository<MessageInfo>>();
+builder.Services.AddTransient<ICRUDRepository<VideoInfo>, CRUDRepository<VideoInfo>>();
+builder.Services.AddTransient<ICRUDRepository<DocumentInfo>, CRUDRepository<DocumentInfo>>();
 
 builder.Services.AddSwaggerGen(c =>
 {
