@@ -14,6 +14,7 @@ import { MicrosoftLoginProvider, SocialAuthServiceConfig } from '@abacritt/angul
 import { LogoutComponent } from './logout/logout.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
+import { FormatUrlPipe } from './Pipes/format-url.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
     LoginComponent,
     LogoutComponent,
     CoursesComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    FormatUrlPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,7 +39,8 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'course/:id', component: CourseDetailsComponent },
+      { path: 'module', redirectTo: 'course/:name' },
+      { path: 'course/:name', component: CourseDetailsComponent },
       { path: 'swagger', component: SwaggerComponent },
       { path: '**', redirectTo: '/', pathMatch: 'full' }
     ])
