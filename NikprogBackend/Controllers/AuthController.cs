@@ -1,22 +1,24 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using NikprogBackend.Data;
-using NikprogBackend.Models.SocialTokens;
-using NikprogBackend.Models.UserHandling;
-using NikprogBackend.Services;
+using NikprogServerClient.Data;
+using NikprogServerClient.Models.SocialTokens;
+using NikprogServerClient.Models.UserHandling;
+using NikprogServerClient.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace NikprogBackend.Controllers
+namespace NikprogServerClient.Controllers
 {
+    [Route("[controller]/[action]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly NikprogDbContext _context;
         private readonly UserManager<NikprogUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly Microsoft.Extensions.Configuration.IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public AuthController(NikprogDbContext context, UserManager<NikprogUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {

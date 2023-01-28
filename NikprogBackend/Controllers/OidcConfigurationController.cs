@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NikprogBackend.Controllers
+namespace NikprogServerClient.Controllers
 {
     public class OidcConfigurationController : Controller
     {

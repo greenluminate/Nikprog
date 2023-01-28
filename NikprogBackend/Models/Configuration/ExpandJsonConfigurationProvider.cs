@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration.Json;
 
-namespace NikprogBackend.Models.Configuration
+namespace NikprogServerClient.Models.Configuration
 {
     public class ExpandJsonConfigurationProvider : JsonConfigurationProvider
     {

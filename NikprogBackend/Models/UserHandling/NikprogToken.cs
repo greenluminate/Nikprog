@@ -1,4 +1,4 @@
-﻿namespace NikprogBackend.Models.UserHandling
+﻿namespace NikprogServerClient.Models.UserHandling
 {
     public class NikprogToken
     {

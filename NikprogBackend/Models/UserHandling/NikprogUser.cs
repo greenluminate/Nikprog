@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace NikprogBackend.Models.UserHandling
+namespace NikprogServerClient.Models.UserHandling
 {
     public enum LoginMode
     {

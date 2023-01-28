@@ -1,4 +1,4 @@
-﻿namespace NikprogBackend.Models
+﻿namespace NikprogServerClient.Models.CourseMaterials
 {
     public enum DifficultyEnum
     {

@@ -1,7 +1,6 @@
-﻿using NikprogBackend.Models.CourseMaterials;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NikprogBackend.Models
+namespace NikprogServerClient.Models.CourseMaterials
 {
     public class DocumentInfo : MaterialInfo
     {

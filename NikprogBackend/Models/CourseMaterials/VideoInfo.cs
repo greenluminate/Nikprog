@@ -1,6 +1,4 @@
-﻿using NikprogBackend.Models.CourseMaterials;
-
-namespace NikprogBackend.Models
+﻿namespace NikprogServerClient.Models.CourseMaterials
 {
     public class VideoInfo : MaterialInfo
     {

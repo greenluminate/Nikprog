@@ -1,4 +1,4 @@
-﻿namespace NikprogBackend.Models.SocialTokens
+﻿namespace NikprogServerClient.Models.SocialTokens
 {
     public class MSModel
     {
