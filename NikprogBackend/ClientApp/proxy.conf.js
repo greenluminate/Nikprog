@@ -6,8 +6,15 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 const PROXY_CONFIG = [
   {
     context: [
-      "/course",//,
-      "/module"//,
+      /*      "/",*/
+      //"/api/",
+      //"/api",
+      //"/api/*",
+      //"/api/**",
+      //"/*",
+      "/**"
+      //"/course",
+      //"/module",
       //"/_configuration",
       //"/.well-known",
       //"/Identity",
@@ -15,7 +22,7 @@ const PROXY_CONFIG = [
       //"/ApplyDatabaseMigrations",
       //"/_framework"
     ],
-    target: target,
+    target: target, // "https://localhost:5137", // 7224
     secure: false,
     headers: {
       Connection: 'Keep-Alive'

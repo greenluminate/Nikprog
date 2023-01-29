@@ -39,11 +39,12 @@ import { FormatUrlPipe } from './Pipes/format-url.pipe';
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'module', redirectTo: 'course/:name' },
+      { path: 'module', redirectTo: 'courses' },
+      { path: 'course', redirectTo: 'courses' },
       { path: 'course/:name', component: CourseDetailsComponent },
       { path: 'swagger', component: SwaggerComponent },
       { path: '**', redirectTo: '/', pathMatch: 'full' }
-    ])
+    ], { useHash: true })
   ],
   providers: [
     /*{ provide: MAT_DATE_LOCALE, useValue: 'hu-HU' },*/
