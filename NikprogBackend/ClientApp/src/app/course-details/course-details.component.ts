@@ -27,12 +27,19 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCourse();
+    this.getModules();
+  }
+
+  private getCourse(): void {
     this.courseApiService.get('course', this.id).subscribe(course => {
       this.course = course;
     });
+  }
 
+  private getModules(): void {
     this.moduleApiService.getModulesByCourseId('module/GetModulesByCourseId', this.id).subscribe(modules => {
-      this.modules = modules as Module[]
+      this.modules = modules as Module[] //ToDo:Problem: State became empty on f5
     });
   }
 
