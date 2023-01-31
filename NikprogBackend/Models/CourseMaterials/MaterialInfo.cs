@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NikprogServerClient.Models.CourseMaterials
 {
     [Table("material_info")]
-    public abstract class MaterialInfo //ToDo: abstract factory. I am not sure yet.    {
+    public abstract class MaterialInfo //ToDo: abstract factory. I am not sure yet.
     {
         [Key]
         [Column("id")]
