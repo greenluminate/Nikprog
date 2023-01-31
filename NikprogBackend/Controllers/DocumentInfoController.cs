@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NikprogServerClient.Logic;
 using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DocumentInfoController : GPPDController<DocumentInfo>
