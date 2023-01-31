@@ -13,7 +13,7 @@ namespace NikprogServerClient.Logic
             this.repo = repo;
         }
 
-        public void Create(TEntity obj)
+        public void Create(TEntity obj)//Plus: Chain of Responsibility
         {
             Type type = obj.GetType();
             var properties = type.GetProperties().Where(p => p.GetCustomAttribute<NotMappedAttribute>() is null).ToArray();
@@ -31,7 +31,7 @@ namespace NikprogServerClient.Logic
                 int j = 0;
                 while (objIsCreatable && j < attributes.Length)
                 {
-                    objIsCreatable = (attributes[j] as ValidationAttribute).IsValid(propertyValue);
+                    objIsCreatable = ((ValidationAttribute)attributes[j]).IsValid(propertyValue);
 
                     j++;
                 }
@@ -77,7 +77,7 @@ namespace NikprogServerClient.Logic
                 int j = 0;
                 while (objIsCreatable && j < attributes.Length)
                 {
-                    objIsCreatable = (attributes[j] as ValidationAttribute).IsValid(propertyValue);
+                    objIsCreatable = ((ValidationAttribute)attributes[j]).IsValid(propertyValue);
 
                     j++;
                 }

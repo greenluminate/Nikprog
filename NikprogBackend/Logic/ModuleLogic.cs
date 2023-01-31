@@ -3,10 +3,11 @@ using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Logic
 {
-    public class ModuleLogic : IModuleLogic
+    public class ModuleLogic : CRUDLogic<Module>, IModuleLogic
     {
-        internal IModuleRepository moduleRepo;
+        IModuleRepository moduleRepo;
         public ModuleLogic(IModuleRepository moduleRepo)
+            : base((CRUDRepository<Module>)moduleRepo)
         {
             this.moduleRepo = moduleRepo;
         }

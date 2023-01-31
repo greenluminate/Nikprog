@@ -3,10 +3,11 @@ using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Logic
 {
-    public class MaterialInfoLogic : IMaterialInfoLogic
+    public class MaterialInfoLogic : CRUDLogic<MaterialInfo>, IMaterialInfoLogic
     {
-        internal IMaterialInfoRepository materialInfoRepo;
+        IMaterialInfoRepository materialInfoRepo;
         public MaterialInfoLogic(IMaterialInfoRepository materialInfoRepo)
+            : base((CRUDRepository<MaterialInfo>)materialInfoRepo)
         {
             this.materialInfoRepo = materialInfoRepo;
         }
