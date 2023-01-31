@@ -13,47 +13,52 @@ export class NikprogApiService<T> {
   }
 
   getList(resourseUrl: string): Observable<T[]> {
-    let header = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
 
-    return this.httpClient.get<T[]>(`/${resourseUrl}`, { headers: header }) // (`${this.APIUrl}}?${params.toString()}`)
+    return this.httpClient.get<T[]>(`/${resourseUrl}`, { headers: this.getHeaderWithUserToken() })
       .pipe(
         catchError(this.handleError)
       );
   }
 
   get(resourseUrl: string, id: string | number): Observable<T> {
-    return this.httpClient.get<T>(`/${resourseUrl}/${id}`)
+
+    return this.httpClient.get<T>(`/${resourseUrl}/${id}`, { headers: this.getHeaderWithUserToken() })
       .pipe(
         catchError(this.handleError)
       );
   }
 
   post(resourseUrl: string, resource: T): Observable<any> {
-    return this.httpClient.post(`/${resourseUrl}`, resource)
+    return this.httpClient.post(`/${resourseUrl}`, resource, { headers: this.getHeaderWithUserToken() })
       .pipe(
         catchError(this.handleError)
       );
   }
 
   delete(resourseUrl: string, id: string | number): Observable<any> {
-    return this.httpClient.delete(`/${resourseUrl}/${id}`)
+    return this.httpClient.delete(`/${resourseUrl}/${id}`, { headers: this.getHeaderWithUserToken() })
       .pipe(
         catchError(this.handleError)
       );
   }
 
   update(resourseUrl: string, resource: T) {
-    return this.httpClient.put(`/${resourseUrl}`, resource)
+
+    return this.httpClient.put(`/${resourseUrl}`, resource, { headers: this.getHeaderWithUserToken() })
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  protected handleError(error: HttpErrorResponse) {
     // Handle the HTTP error here
-    return throwError('Something wrong happened');
+    return throwError('Something went wrong.');//throwError(error.message);
+  } // Test it with Postman
+
+  protected getHeaderWithUserToken(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
   }
 }
