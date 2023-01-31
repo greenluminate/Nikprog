@@ -17,14 +17,14 @@ export class UserService {
         t.expiration = new Date(t.expiration);
         localStorage.setItem('token', t.token);
         localStorage.setItem('expiration', t.expiration.getTime().toString());
-        this.navigator.goTo('/home');
+        this.navigator.goTo('/courses');
       });
   }
 
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
-    this.navigator.goTo('/home');
+    this.navigator.goTo('/login');
   }
 
   public isLoggedIn(): boolean {
