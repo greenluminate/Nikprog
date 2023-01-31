@@ -1,18 +1,15 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <p *ngIf="!modules?.length"><em>Loading...</em></p>
-    <p>{{this.name}}</p>
-    <p>{{this.id}}</p>
-    <div *ngFor="let module of modules"
-         class="card border border-info border-1 col col-xs-6 col-sm-5 col-md-4 col-lg-3">
-      <div class="card-header bg-info row">
-        <h6 class="row-sm-1">{{ module.id }}</h6>
-      </div>
-      <div class=" card-body bg-light row">
-        <h6 class="row-sm-1">{{ module.name }}</h6>
-      </div>
-      <div class="card-header bg-info row">
-      </div>
+  <h2>{{this.name}}</h2>
+  <p *ngIf="modules.length != 0 && !modules?.length"><em>Loading...</em></p>
+  <div class="card" *ngFor="let module of modules">
+    <a data-bs-toggle="collapse" href="{{'#module' + module.sequenceNum}}" class="card-header btn" aria-expanded="false">
+      {{ "Module " + module.sequenceNum + " " + module.name }}
+    </a>
+    <div class="collapse card-body" id="{{'module' + module.sequenceNum}}">
+      <app-module></app-module>
     </div>
   </div>
+  <h1 *ngIf="modules.length == 0">There is no lectures in this course yet, please come back later.</h1>
 </div>
+<!--ToDo: solve laggy collapse-toggle problem-->
+<!--ToDo in every html file: texts should be in TextService!-->
