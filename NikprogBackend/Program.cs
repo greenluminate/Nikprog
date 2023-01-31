@@ -18,7 +18,7 @@ builder.Services.AddDbContext<NikprogDbContext>(options =>
     //options.UseSqlServer(connectionString));
     options.UseInMemoryDatabase("db")
     .UseLazyLoadingProxies());
-//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<NikprogUser, IdentityRole>(
         options =>
@@ -31,15 +31,6 @@ builder.Services.AddIdentity<NikprogUser, IdentityRole>(
         }
     ).AddEntityFrameworkStores<NikprogDbContext>()
      .AddDefaultTokenProviders();
-
-//builder.Services.AddDefaultIdentity<NikprogUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<NikprogDbContext>();
-
-//builder.Services.AddIdentityServer()
-//    .AddApiAuthorization<NikprogUser, NikprogDbContext>();
-
-//builder.Services.AddAuthentication()
-//    .AddIdentityServerJwt();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -60,6 +51,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors();
+
 builder.Services
     .AddControllers()
     .AddJsonOptions(opts =>
@@ -72,6 +65,7 @@ builder.Services.AddScoped<ICRUDLogic<MaterialInfo>, CRUDLogic<MaterialInfo>>();
 builder.Services.AddScoped<ICRUDLogic<MessageInfo>, CRUDLogic<MessageInfo>>();
 builder.Services.AddScoped<ICRUDLogic<VideoInfo>, CRUDLogic<VideoInfo>>();
 builder.Services.AddScoped<ICRUDLogic<DocumentInfo>, CRUDLogic<DocumentInfo>>();
+builder.Services.AddScoped<IModuleLogic, ModuleLogic>();
 
 builder.Services.AddTransient<ICRUDRepository<Course>, CRUDRepository<Course>>();
 builder.Services.AddTransient<ICRUDRepository<Module>, CRUDRepository<Module>>();
@@ -79,20 +73,22 @@ builder.Services.AddTransient<ICRUDRepository<MaterialInfo>, CRUDRepository<Mate
 builder.Services.AddTransient<ICRUDRepository<MessageInfo>, CRUDRepository<MessageInfo>>();
 builder.Services.AddTransient<ICRUDRepository<VideoInfo>, CRUDRepository<VideoInfo>>();
 builder.Services.AddTransient<ICRUDRepository<DocumentInfo>, CRUDRepository<DocumentInfo>>();
+builder.Services.AddTransient<IModuleRepository, ModuleRepository>();
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "NikprogRegen", Version = "v1" });
 });
 
-builder.Services.AddCors();
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // The default HSTS value is 30 days. You may want to change this for production scenarios,
+    // see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
