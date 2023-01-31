@@ -21,7 +21,7 @@ namespace NikprogServerClient.Controllers
         [HttpGet("[action]/{moduleId}")]
         public IEnumerable<MaterialInfo> GetMaterialInfosByModuleId(string moduleId)
         {
-            return materialLogic.ReadAllMaterialsByModuleId(moduleId);
+            return materialLogic.ReadAllMaterialInfosByModuleId(moduleId);
         }
     }
 }
