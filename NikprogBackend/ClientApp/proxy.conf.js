@@ -12,7 +12,8 @@ const PROXY_CONFIG = [
       //"/api/*",
       //"/api/**",
       //"/*",
-      "/**"
+      "/**",
+      "/*"
       //"/course",
       //"/module",
       //"/_configuration",
