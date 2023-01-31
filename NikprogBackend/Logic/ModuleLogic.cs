@@ -1,5 +1,4 @@
-﻿using IdentityModel;
-using NikprogServerClient.Data;
+﻿using NikprogServerClient.Data;
 using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Logic

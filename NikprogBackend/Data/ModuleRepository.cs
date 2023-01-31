@@ -1,5 +1,4 @@
-﻿using IdentityModel;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Data
