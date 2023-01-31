@@ -66,6 +66,7 @@ builder.Services.AddScoped<ICRUDLogic<MessageInfo>, CRUDLogic<MessageInfo>>();
 builder.Services.AddScoped<ICRUDLogic<VideoInfo>, CRUDLogic<VideoInfo>>();
 builder.Services.AddScoped<ICRUDLogic<DocumentInfo>, CRUDLogic<DocumentInfo>>();
 builder.Services.AddScoped<IModuleLogic, ModuleLogic>();
+builder.Services.AddScoped<IMaterialInfoLogic, MaterialInfoLogic>();
 
 builder.Services.AddTransient<ICRUDRepository<Course>, CRUDRepository<Course>>();
 builder.Services.AddTransient<ICRUDRepository<Module>, CRUDRepository<Module>>();
@@ -74,6 +75,7 @@ builder.Services.AddTransient<ICRUDRepository<MessageInfo>, CRUDRepository<Messa
 builder.Services.AddTransient<ICRUDRepository<VideoInfo>, CRUDRepository<VideoInfo>>();
 builder.Services.AddTransient<ICRUDRepository<DocumentInfo>, CRUDRepository<DocumentInfo>>();
 builder.Services.AddTransient<IModuleRepository, ModuleRepository>();
+builder.Services.AddTransient<IMaterialInfoRepository, MaterialInfoRepository>();
 
 builder.Services.AddSwaggerGen(c =>
 {
