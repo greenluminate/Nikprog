@@ -62,8 +62,9 @@ namespace NikprogServerClient.Data
                 .HasForeignKey(mat => mat.ModuleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            //ToDo: WIP : nextcloudApi instead of public url-s.
             #region CourseHasSets
-            Course stf1 = new Course()
+            Course stf1 = new Course()//ToDo: builder method, I do not think it is necessary
             {
                 Id = "1e95a891-7f0c-408b-b473-1b7ce4db0272",
                 Name = "Szoftvertervezés és -fejlesztés I.",
