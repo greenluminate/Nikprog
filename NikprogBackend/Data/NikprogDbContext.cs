@@ -149,7 +149,7 @@ namespace NikprogServerClient.Data
                 Id = "6b96a891-7f0c-408b-b473-1b7ce4db0421",
                 Title = "The document",
                 SequenceNum = 1,
-                ModuleId = "3e95a891-7f0c-408b-b473-1b7ce4db0344",
+                ModuleId = "2e94a891-7g0c-408b-b473-1b7ce4db0352",
                 Url = "http://localhost:8080/s/rjQYxa8mbM6MXtE"
             };
 
@@ -158,7 +158,7 @@ namespace NikprogServerClient.Data
                 Id = "7c88a891-7f0c-638b-b473-1b7ce4db3245",
                 Title = "The video",
                 SequenceNum = 2,
-                ModuleId = "3e95a891-7f0c-408b-b473-1b7ce4db0344",
+                ModuleId = "2e94a891-7g0c-408b-b473-1b7ce4db0352",
                 Url = "http://localhost:8080/s/rjQYxa8mbM6MXtE"
             };
 
