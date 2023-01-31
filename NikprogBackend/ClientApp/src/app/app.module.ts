@@ -17,7 +17,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { FormatUrlPipe } from './Pipes/format-url.pipe';
 //import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ModuleComponent } from './module/module.component';
+import { MaterialInfoComponent } from './material-info/material-info.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ModuleComponent } from './module/module.component';
     CoursesComponent,
     CourseDetailsComponent,
     FormatUrlPipe,
-    ModuleComponent
+    MaterialInfoComponent
 
   ],
   imports: [
