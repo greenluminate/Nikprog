@@ -19,12 +19,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.userService.isLoggedIn()) {
-      this.signInWithO365();//It would be good with redirect mode
-    }
+    //if (!this.userService.isLoggedIn()) {
+    //  this.signInWithO365(); // It would be good with redirect mode
+    //}
   }
 
   signInWithO365(): void {
     this.authService.signIn(MicrosoftLoginProvider.PROVIDER_ID);
+
+    let textWait = document.createElement('h1');
+    textWait.innerHTML = "Please wait unti course list shows up.";
+    document.getElementById('loginDiv')?.append(textWait);
   }
 }
