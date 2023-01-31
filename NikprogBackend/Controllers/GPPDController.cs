@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NikprogServerClient.Logic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NikprogServerClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
     public class GPPDController<TEntity> : ControllerBase where TEntity : class
     {
         ICRUDLogic<TEntity> logic;
@@ -30,6 +30,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Amind, Techer")]
         public void Post([FromBody] TEntity entity)
         {
             logic.Create(entity);
@@ -42,6 +43,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Amind, Techer")]
         public void Put([FromBody] TEntity entity)
         {
             logic.Update(entity);
@@ -54,6 +56,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Amind, Techer")]
         public void Delete(string id)
         {
             var entityToDelete = logic.Read(id);
