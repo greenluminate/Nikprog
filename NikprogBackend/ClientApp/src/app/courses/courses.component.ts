@@ -1,4 +1,4 @@
-import { Component, Inject, InjectionToken } from '@angular/core';
+import { Component } from '@angular/core';
 import { Course } from '../models/course';
 import { NikprogApiService } from '../services/nikprog-api.service';
 
