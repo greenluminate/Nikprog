@@ -6,10 +6,9 @@
       {{ "Module " + module.sequenceNum + " " + module.name }}
     </a>
     <div class="collapse card-body" id="{{'module' + module.sequenceNum}}">
-      <app-module></app-module>
+      <app-material-info [moduleId]="module.id"></app-material-info>
     </div>
   </div>
   <h1 *ngIf="modules.length == 0">There is no lectures in this course yet, please come back later.</h1>
 </div>
-<!--ToDo: solve laggy collapse-toggle problem-->
 <!--ToDo in every html file: texts should be in TextService!-->
