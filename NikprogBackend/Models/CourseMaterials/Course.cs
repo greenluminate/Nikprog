@@ -36,5 +36,12 @@ namespace NikprogServerClient.Models.CourseMaterials
             Modules = new HashSet<Module>();
             IsHidden = false;
         }
+
+        // "Client does not want to strore who created it,
+        // but it wouldbe nicer due to authorization.
+        // Ex.: Delete only your own course"
+        //[Required]
+        //[ForeignKey(nameof(NikprogUser))]
+        //public string UserId { get; set; }
     }
 }
