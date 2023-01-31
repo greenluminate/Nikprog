@@ -15,6 +15,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { FormatUrlPipe } from './Pipes/format-url.pipe';
+//import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ModuleComponent } from './module/module.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +29,16 @@ import { FormatUrlPipe } from './Pipes/format-url.pipe';
     LogoutComponent,
     CoursesComponent,
     CourseDetailsComponent,
-    FormatUrlPipe
+    FormatUrlPipe,
+    ModuleComponent
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    //MatSlideToggleModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       //{ path: 'home', redirectTo: '/', pathMatch: 'full' },
@@ -49,9 +55,10 @@ import { FormatUrlPipe } from './Pipes/format-url.pipe';
   providers: [
     /*{ provide: MAT_DATE_LOCALE, useValue: 'hu-HU' },*/
 
-    {// ToDo: Somehow force it to redirect mode instead of popup mode ( in abacritt/angularx-social-login I did not found options for it)
-      // Problem with login: somethimes it automatically authenticates the user, so we can not chose or switch between users.
-      // Problem with logout: it logs the user out of every o365 authed apps.
+    { // ToDo: Somehow force it to redirect mode instead of popup mode =>
+      // ToDO: => ( in abacritt / angularx - social - login I did not found options for it)
+      // My problem with login: somethimes it automatically authenticates the user, so we can not choose or switch between users.
+      // My problem with logout: it logs the user out of every o365 authed apps.
       provide: 'SocialAuthServiceConfig',
       useValue: {
         autoLogin: false,
@@ -71,6 +78,7 @@ import { FormatUrlPipe } from './Pipes/format-url.pipe';
       } as SocialAuthServiceConfig
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
