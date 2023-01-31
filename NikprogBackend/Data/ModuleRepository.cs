@@ -3,20 +3,12 @@ using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Data
 {
-    public class ModuleRepository : IModuleRepository
+    public class ModuleRepository : CRUDRepository<Module>, IModuleRepository
     {
-        internal NikprogDbContext db;
-        internal DbSet<Module> moduleDbSet;
-
-        public ModuleRepository(NikprogDbContext db)
-        {
-            this.db = db;
-            this.moduleDbSet = db.Set<Module>();
-        }
-
+        public ModuleRepository(NikprogDbContext db) : base(db) { }
         public IQueryable<Module> ReadAllModulesByCourseId(string courseId)
         {
-            return moduleDbSet.Where(m => m.CourseId == courseId);
+            return dbSet.Where(m => m.CourseId == courseId);
         }
     }
 }
