@@ -10,9 +10,18 @@ namespace NikprogServerClient.Controllers
     [ApiController]
     public class MaterialInfoController : GPPDController<MaterialInfo>
     {
-        public MaterialInfoController(ICRUDLogic<MaterialInfo> logic)
+
+        IMaterialInfoLogic materialLogic;
+        public MaterialInfoController(ICRUDLogic<MaterialInfo> logic, IMaterialInfoLogic materialLogic)
             : base(logic)
         {
+            this.materialLogic = materialLogic;
+        }
+
+        [HttpGet("[action]/{moduleId}")]
+        public IEnumerable<MaterialInfo> GetMaterialInfosByModuleId(string moduleId)
+        {
+            return materialLogic.ReadAllMaterialsByModuleId(moduleId);
         }
     }
 }
