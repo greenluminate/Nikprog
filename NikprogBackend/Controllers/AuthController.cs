@@ -34,7 +34,7 @@ namespace NikprogServerClient.Controllers
             //string appid = Environment.GetEnvironmentVariable("NIKPROG_AZURE_APP_ID");
 
             RestService rest = new RestService("https://graph.microsoft.com");
-            var result = rest.GetSingle<MSModel>($"/oidc/userinfo", token.Token);//ToDo: supervise this!
+            var result = rest.GetSingle<MSModel>($"/oidc/userinfo", token.Token);
 
             NikprogUser user = new NikprogUser
             {
