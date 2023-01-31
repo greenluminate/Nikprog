@@ -1,17 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NikprogServerClient.Logic;
 using NikprogServerClient.Models.CourseMaterials;
 
 namespace NikprogServerClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ModuleController : GPPDController<Module>
     {
-        public ModuleController(ICRUDLogic<Module> logic)
+        IModuleLogic moduleLogic;
+        public ModuleController(ICRUDLogic<Module> logic, IModuleLogic moduleLogic)
             : base(logic)
         {
+            this.moduleLogic = moduleLogic;
+        }
+
+        [HttpGet("[action]/{courseId}")]
+        public IEnumerable<Module> GetModulesByCourseId(string courseId)
+        {
+            return moduleLogic.ReadAllModulesByCourseId(courseId);
         }
     }
 }
