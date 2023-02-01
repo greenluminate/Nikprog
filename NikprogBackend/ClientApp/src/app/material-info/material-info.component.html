@@ -1,5 +1,10 @@
 <div class="container">
   <div *ngFor="let materialInfo of materialInfos">
-    <p>{{materialInfo.title}}</p>
+    <a [href]="materialInfo.url">
+      <div class="card-body">
+        <i class="bi bi-youtube tutor-icon-youtube"></i>
+        {{materialInfo.title}}
+      </div>
+    </a>
   </div>
 </div>
