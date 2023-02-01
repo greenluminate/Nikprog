@@ -29,6 +29,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "5.2",
     "bootstrap-icons": "^1.10.3",
+    "guid-typescript": "^1.0.7",
     "jquery": "^3.6.3",
     "material": "^0.5.2",
     "moment": "^2.29.4",
