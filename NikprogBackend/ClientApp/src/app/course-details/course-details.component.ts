@@ -4,6 +4,7 @@ import { Course } from '../models/course';
 import { Module } from '../models/module';
 import { ModuleApiService } from '../services/module-api.service';
 import { NikprogApiService } from '../services/nikprog-api.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-course-details',
@@ -17,6 +18,7 @@ export class CourseDetailsComponent implements OnInit {
   public modules: Module[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute,
+    public userService: UserService,
     private courseApiService: NikprogApiService<Course>,
     private moduleApiService: ModuleApiService) {
     this.id = (this.router.getCurrentNavigation()?.extras.state)?.id;
