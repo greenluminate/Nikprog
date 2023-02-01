@@ -23,7 +23,7 @@ namespace NikprogServerClient.Models.CourseMaterials
 
         [NotMapped]
         [JsonIgnore]
-        public virtual Course Course { get; set; }
+        public virtual Course? Course { get; set; }
 
         [Required]
         [ForeignKey(nameof(Course))]
