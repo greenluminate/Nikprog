@@ -12,7 +12,7 @@ export class UserService {
   constructor(private navigator: NavigatorService, private http: HttpClient) { }
 
   public o365Login(socialToken: SocialToken) {
-    this.http.post<NikprogToken>('https://localhost:7224/auth/microsoft', socialToken)
+    this.http.post<NikprogToken>('https://localhost:7224/auth/microsoft', socialToken)//ToDo: to outsource into userApiService
       .subscribe(t => {
         t.expiration = new Date(t.expiration);
         localStorage.setItem('token', t.token);
@@ -35,6 +35,12 @@ export class UserService {
     else {
       return false;
     }
+  }
+
+  public getRole(): string {
+    if (this.isLoggedIn()) {
+    }
+    return "Admin"; // ToDo: implement on server side to be able to get role of loggedin user
   }
 
   public getToken() {
