@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -28,11 +27,9 @@ export class NikprogApiService<T> {
       );
   }
 
-  post(resourseUrl: string, resource: T): Observable<any> {
-    return this.httpClient.post(`/${resourseUrl}`, resource, { headers: this.getHeaderWithUserToken() })
-      .pipe(
-        catchError(this.handleError)
-      );
+  post(resourseUrl: string, resource: T): any {
+    return this.httpClient.post<any>(`/${resourseUrl}`, resource, { headers: this.getHeaderWithUserToken() })
+      .subscribe(() => catchError(this.handleError));
   }
 
   delete(resourseUrl: string, id: string | number): Observable<any> {
