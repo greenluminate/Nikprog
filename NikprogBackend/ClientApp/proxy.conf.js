@@ -1,7 +1,7 @@
 const { env } = require('process');
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}/api` :
-  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:32265/api';
+  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:32265/api';
 
 const PROXY_CONFIG = [
   {
@@ -12,8 +12,11 @@ const PROXY_CONFIG = [
       //"/api/*",
       //"/api/**",
       //"/*",
-      "/**",
-      "/*"
+      "/module",
+      "/course",
+      "/materialInfo"
+      //"/**",
+      //"/*"
       //"/course",
       //"/module",
       //"/_configuration",
