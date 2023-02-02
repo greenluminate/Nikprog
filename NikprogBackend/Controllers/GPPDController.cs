@@ -30,7 +30,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Amind, Techer")]
+        [Authorize(Roles = "Admin, Teacher")]
         public void Post([FromBody] TEntity entity)
         {
             logic.Create(entity);
@@ -43,7 +43,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Amind, Techer")]
+        [Authorize(Roles = "Admin, Teacher")]
         public void Put([FromBody] TEntity entity)
         {
             logic.Update(entity);
@@ -56,7 +56,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Amind, Techer")]
+        [Authorize(Roles = "Admin, Teacher")]
         public void Delete(string id)
         {
             var entityToDelete = logic.Read(id);
