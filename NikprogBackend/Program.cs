@@ -82,8 +82,6 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "NikprogRegen", Version = "v1" });
 });
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -97,15 +95,15 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NikprogRegen v1"));
 
-app.UseCors(t => t
-.WithOrigins("https://localhost:44431")
-.AllowAnyHeader()
-.AllowCredentials()
-.AllowAnyMethod());
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseCors(t => t
+.WithOrigins("https://localhost:44431", "https://localhost:32265")
+.AllowAnyMethod()
+.AllowAnyHeader()
+.AllowCredentials());
 
 app.UseAuthentication();
 app.UseAuthorization();
