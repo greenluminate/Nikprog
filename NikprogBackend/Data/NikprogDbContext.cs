@@ -26,7 +26,7 @@ namespace NikprogServerClient.Data
             NikprogUser moni = new NikprogUser
             {
                 Id = Guid.NewGuid().ToString(),
-                Email = "q4nisq@stud.uni-obuda.hu",
+                Email = "Q4NSIQ@stud.uni-obuda.hu",
                 EmailConfirmed = true,
                 FirstName = "Mónika",
                 LastName = "Tóth",
