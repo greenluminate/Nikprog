@@ -30,7 +30,7 @@ namespace NikprogServerClient.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin, Teacher")]//ToDO: i can't post even if i am Admin?! check this fact!
+        [Authorize(Roles = "Admin, Teacher")]
         public void Post([FromBody] TEntity entity)
         {
             logic.Create(entity);

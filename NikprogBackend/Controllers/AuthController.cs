@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using NextcloudApi;
 using NikprogServerClient.Data;
 using NikprogServerClient.Models.SocialTokens;
 using NikprogServerClient.Models.UserHandling;
@@ -67,7 +68,7 @@ namespace NikprogServerClient.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, appuser.Email)
                 };
 
-                foreach (var role in await _userManager.GetRolesAsync(user))
+                foreach (var role in await _userManager.GetRolesAsync(appuser))
                 {
                     claim.Add(new Claim(ClaimTypes.Role, role));
                 }
