@@ -2,6 +2,10 @@
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">Nikprog</a>
+      <div *ngIf="this.userService.getRoleFromLocalStorage() == 'Admin'" class="form-check form-switch">
+        <input (click)="switchEditorMode()" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Editor mode</label>
+      </div>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -17,16 +21,16 @@
           <li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+            <a class="nav-link" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a *ngIf="this.userService.isLoggedIn()" class="nav-link text-dark" [routerLink]="['/courses']">Courses</a>
+            <a *ngIf="this.userService.isLoggedIn()" class="nav-link" [routerLink]="['/courses']">Courses</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
+            <a class="nav-link" [routerLink]="['/login']">Login</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/logout']">Logout</a>
+            <a class="nav-link" [routerLink]="['/logout']">Logout</a>
           </li>
         </ul>
       </div>
