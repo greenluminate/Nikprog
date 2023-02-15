@@ -1,0 +1,14 @@
+<div class="container" (keyup.enter)="Create()">
+  <label for="title">Title of Material</label>
+  <input id="title" type="text" class="form-control" required minlength="4" [(ngModel)]="newMaterialInfo.title" #title="ngModel">
+  <div class="bg-danger" *ngIf="title.errors?.['minlength']">
+    Title must be at least 4 characters long.
+  </div>
+  <br />
+  <input id="file" type="file" class="form-control file-upload" onchange="console.log(event.target.files)">
+  <br />
+  <button id="createBtn" [disabled]="!IsSendable() || title.errors?.['minlength']" [ngStyle]="{'background-color':!IsSendable() || title.errors?.['minlength']? 'grey' : 'blue' }"
+          (click)="Create()">
+    Create Material
+  </button>
+</div>
