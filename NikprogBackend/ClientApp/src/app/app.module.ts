@@ -19,6 +19,8 @@ import { FormatUrlPipe } from './Pipes/format-url.pipe';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialInfoComponent } from './material-info/material-info.component';
 import { CreateModuleComponent } from './create-module/create-module.component';
+import { CreateMaterialComponent } from './create-material/create-material.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { CreateModuleComponent } from './create-module/create-module.component';
     CourseDetailsComponent,
     FormatUrlPipe,
     MaterialInfoComponent,
-    CreateModuleComponent
+    CreateModuleComponent,
+    CreateMaterialComponent
 
   ],
   imports: [
@@ -40,6 +43,7 @@ import { CreateModuleComponent } from './create-module/create-module.component';
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    DragDropModule,
     //MatSlideToggleModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
