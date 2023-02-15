@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -6,11 +6,15 @@ import { UserService } from '../services/user.service';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
 
-  isExpanded = false;
+  isExpanded: boolean = false;
+  public isEditorMode: boolean = false;
+  constructor(public userService: UserService) { this.switchEditorMode(); }
 
-  constructor(public userService: UserService) { }
+  ngOnInit(): void {
+    this.switchEditorMode();
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -18,5 +22,10 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  switchEditorMode() {
+    this.isEditorMode = !this.isEditorMode;
+    localStorage.setItem('editorMode', this.isEditorMode ? 'true' : 'false');
   }
 }
