@@ -1,4 +1,5 @@
 ﻿using NikprogServerClient.Data;
+using NikprogServerClient.Models.CourseMaterials;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
@@ -13,11 +14,12 @@ namespace NikprogServerClient.Logic
             this.repo = repo;
         }
 
-        public void Create(TEntity obj)//Plus: Chain of Responsibility
+        public virtual void Create(TEntity obj)//Plus: Chain of Responsibility
         {
             Type type = obj.GetType();
             var properties = type.GetProperties().Where(p => p.GetCustomAttribute<NotMappedAttribute>() is null).ToArray();
 
+            bool hasSequenceNum = false;
             bool objIsCreatable = true;
             int i = 0;
             var property = properties[i];
@@ -28,22 +30,30 @@ namespace NikprogServerClient.Logic
                 var attributes = property.GetCustomAttributes(false).Where(attr => attr.GetType().BaseType.FullName.Contains("ValidationAttribute")).ToArray();
                 propertyValue = property.GetValue(obj);
 
-                int j = 0;
-                while (objIsCreatable && j < attributes.Length)
+                //It sikps the vaéidation if the property name is sequenceNum
+                if (!hasSequenceNum && property.Name.Equals("SequenceNum"))
                 {
-                    objIsCreatable = ((ValidationAttribute)attributes[j]).IsValid(propertyValue);
-
-                    j++;
+                    hasSequenceNum = true;
                 }
+                else
+                {
+                    //It valiadtes the constraint(s) of the property
+                    int j = 0;
+                    while (objIsCreatable && j < attributes.Length)
+                    {
+                        objIsCreatable = ((ValidationAttribute)attributes[j]).IsValid(propertyValue);
 
+                        j++;
+                    }
+                }
                 i++;
             }
 
-            if (objIsCreatable)
+            if (objIsCreatable && !hasSequenceNum)
             {
                 repo.Create(obj);
             }
-            else
+            else if (!objIsCreatable)
             {
                 throw new ArgumentException($"Given parameter is inadequate! {property.Name}: {propertyValue}");
             }

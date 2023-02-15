@@ -31,7 +31,7 @@ namespace NikprogServerClient.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Teacher")]
-        public void Post([FromBody] TEntity entity)
+        public virtual void Post([FromBody] TEntity entity)
         {
             logic.Create(entity);
 

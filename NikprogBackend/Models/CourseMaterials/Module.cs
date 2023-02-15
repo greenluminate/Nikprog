@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -14,9 +15,14 @@ namespace NikprogServerClient.Models.CourseMaterials
         [Required]
         [Range(0, 100)]
         [Column("sequence_num")]
+
         // Sequence in the course
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Index(IsUnique = true)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        //public int SequenceNum { get { return SequenceNum; } set { _ = SequenceNum > 0 ? value : Course?.Modules.Count; } }
         public int SequenceNum { get; set; }
+
         [MaxLength(100)]
         [Column("name")]
         public string? Name { get; set; }
@@ -36,7 +42,6 @@ namespace NikprogServerClient.Models.CourseMaterials
         public Module()
         {
             Id = Guid.NewGuid().ToString();
-            SequenceNum = 0;
             MaterialInfos = new HashSet<MaterialInfo>();
         }
     }

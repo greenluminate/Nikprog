@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using IdentityModel.Client;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NikprogServerClient.Models.CourseMaterials;
 using NikprogServerClient.Models.UserHandling;
+using System.Reflection.Emit;
 
 namespace NikprogServerClient.Data
 {
@@ -16,6 +21,7 @@ namespace NikprogServerClient.Data
         public NikprogDbContext(DbContextOptions<NikprogDbContext> options)
             : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -44,11 +50,9 @@ namespace NikprogServerClient.Data
                 new { Id = "3", Name = "Teacher", NormalizedName = "TEACHER" }
             );
 
-            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                RoleId = "1",
-                UserId = moni.Id
-            });
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string> { RoleId = "1", UserId = moni.Id }
+            );
 
             builder.Entity<Course>()
                .HasMany(c => c.Modules)
@@ -61,6 +65,40 @@ namespace NikprogServerClient.Data
                 .WithOne(mat => mat.Module)
                 .HasForeignKey(mat => mat.ModuleId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            //Database.ExecuteSqlRaw("CREATE OR REPLACE TRIGGER set_module_sequence_number ON modules INSTEAD OF INSERT NOT FOR REPLICATION AS BEGIN UPDATE module as module1 SET sequence_num = SELECT COUNT(*) FROM module WHERE module1.course_id = module.course_id");
+
+            //builder.Entity<Module>()
+            //    .Property(m => m.SequenceNum)
+            //    .ValueGeneratedOnAdd()
+            //    .HasComputedColumnSql("SELECT COUNT(*) FROM course, module WHERE course.id = module.course_id");
+            //    .ValueGeneratedOnAdd();
+
+            ////    .HasColumnOrder();
+            ////    //.ValueGeneratedOnAdd()
+            ////    .HasDefaultValueSql("SELECT COUNT(*) FROM Module WHERE CourseId=[CourseId]");
+            //    .HasDefaultValueSql();
+
+            //.HasValueGenerator(Modules.Select(m => m.Course.Modules).Count);
+            //.HasComputedColumnSql($"SELECT COUNT(*) FROM Module WHERE CourseId={CourseId}");
+            //.HasValueGenerator<InMemoryIntegerValueGenerator<int>>()
+            //.ValueGeneratedOnAdd()
+            //.Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            //.HasValueGenerator(this.Courses.Where(c => c.Id == );
+
+            //This is not unique
+            //builder.HasSequence<int>("SequenceNumberForModule").StartsAt(1).IncrementsBy(1);//, schema: "shared"
+
+            //builder.Entity<Module>()
+            //    .Property(m => m.SequenceNum)
+            //    .ValueGeneratedOnAdd();
+
+            //builder.Entity<Module>()
+            //    .Property(m => m.SequenceNum)
+            //    .HasDefaultValueSql("NEXT VALUE FOR SequenceNumberForModule");
+            //.HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
+            //    //.HasDefaultValueSql("nextval('\"SequenceNumberForModule\"')");
+            //    .HasComputedColumnSql();
 
             //ToDo: WIP : nextcloudApi instead of public url-s.
             #region CourseHasSets

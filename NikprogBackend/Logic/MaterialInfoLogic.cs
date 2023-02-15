@@ -15,5 +15,19 @@ namespace NikprogServerClient.Logic
         {
             return materialInfoRepo.ReadAllMaterialInfosByModuleId(moduleId);
         }
+
+        public override void Create(MaterialInfo obj)
+        {
+            base.Create(obj);
+            obj.SequenceNum = ReadAllMaterialInfosByModuleId(obj.ModuleId).Count() + 1;
+            try
+            {
+                repo.Create(obj);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException($"Given parameter is inadequate! SequenceNum: {obj.SequenceNum}");
+            }
+        }
     }
 }
