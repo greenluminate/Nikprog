@@ -1,4 +1,4 @@
-//Removing extra spaces makes bootstrap collapse smooth.
+//Note: Removing extra spaces makes bootstrap collapse smooth.
 
 .card-body {
   padding: 0rem;
@@ -11,4 +11,15 @@
 app-material-info {
   padding: 0rem;
   margin: 0;
+}
+
+/*.item {
+  padding: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursore:move
+}*/
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
 }

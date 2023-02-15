@@ -1,20 +1,32 @@
 <div class="container">
   <h2>{{this.name}}</h2>
   <p *ngIf="modules.length != 0 && !modules?.length"><em>Loading...</em></p>
-  <div class="card" *ngIf="userService.getRole() == 'Admin'">
+  <div class="card" *ngIf="this.userService.getRoleFromLocalStorage() == 'Admin' && this.userService.getIsEditorMode() == 'true'">
     <a data-bs-toggle="collapse" href="#createModuleBody" class="card-header btn" aria-expanded="false">
-      Create new module &#123; {{userService.getRole() | uppercase }} &#125;
+      Create new module &#123; {{this.userService.getRoleFromLocalStorage() | uppercase }} &#125;
     </a>
     <div class="collapse card-body" id="createModuleBody">
       <app-create-module [courseId]="id"></app-create-module>
     </div>
   </div>
-  <div class="card" *ngFor="let module of modules">
-    <a data-bs-toggle="collapse" href="{{'#module' + module.sequenceNum}}" class="card-header btn" aria-expanded="false">
-      {{ "Module " + module.sequenceNum + " " + module.name }}
-    </a>
-    <div class="collapse card-body" id="{{'module' + module.sequenceNum}}">
-      <app-material-info [moduleId]="module.id"></app-material-info>
+  <div class="dropDownGroup" #dropListContainer cdkDropListGroup>
+    <div *ngFor="let module of modules; let i = index"
+         cdkDropList
+         [cdkDropListData]="i"
+         cdkDropListOrientation="horizontal">
+      <div class="card" [cdkDragDisabled]="!(this.userService.getRoleFromLocalStorage() == 'Admin' && this.userService.getIsEditorMode() == 'true')"
+           cdkDrag
+           [cdkDragData]="i"
+           (cdkDragEntered)="dragEntered($event)"
+           (cdkDragMoved)="dragMoved($event)"
+           (cdkDragDropped)="dragDropped($event)">
+        <a data-bs-toggle="collapse" href="{{'#module' + module.sequenceNum}}" class="card-header btn" aria-expanded="false">
+          {{ "Module " + module.sequenceNum + " " + module.name }}
+        </a>
+        <div class="collapse card-body" id="{{'module' + module.sequenceNum}}">
+          <app-material-info [moduleId]="module.id" [modulesCount]="modules.length"></app-material-info>
+        </div>
+      </div>
     </div>
   </div>
   <h1 *ngIf="modules.length == 0">There is no lectures in this course yet, please come back later.</h1>
