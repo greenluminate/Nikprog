@@ -1,3 +1,4 @@
+using EntityFrameworkCore.Triggers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,19 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("MoniConnectionString");
 builder.Services.AddDbContext<NikprogDbContext>(options =>
-    //options.UseSqlServer(connectionString));
-    options.UseInMemoryDatabase("db")
-    .UseLazyLoadingProxies());
+{
+    options.UseSqlServer(connectionString)
+    .UseLazyLoadingProxies();
+    //options.UseInMemoryDatabase("db")
+    //options.UseTriggers(triggerOptions =>
+    // {
+    //     triggerOptions.AddTrigger<SetSequenceNumberOnAdd>();
+    //     //triggerOptions.AddTrigger<CreateWelcomeEmail>();
+    //     //triggerOptions.AddTrigger<SendEmail>();
+    // });
+});
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<NikprogUser, IdentityRole>(

@@ -13,6 +13,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="EntityFrameworkCore.Triggered" Version="3.2.2" />
+		<PackageReference Include="EntityFrameworkCore.Triggers" Version="1.2.3" />
 		<PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.13" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
@@ -25,6 +27,7 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
