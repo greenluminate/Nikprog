@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MaterialInfo } from '../models/material-info';
 import { MaterialInfoApiService } from '../services/material-info-api.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-material-info',
@@ -8,11 +9,11 @@ import { MaterialInfoApiService } from '../services/material-info-api.service';
   styleUrls: ['./material-info.component.scss']
 })
 export class MaterialInfoComponent implements OnChanges, OnInit {
-  @Input() moduleId: any;
+  @Input() public moduleId: any;
 
   public materialInfos: MaterialInfo[] = [];
 
-  constructor(private materialInfoApiService: MaterialInfoApiService) { }
+  constructor(public userService: UserService, private materialInfoApiService: MaterialInfoApiService) { }
 
   ngOnInit() {
   }

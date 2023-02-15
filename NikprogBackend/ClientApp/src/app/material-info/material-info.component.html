@@ -7,4 +7,7 @@
       </div>
     </a>
   </div>
+  <div class="card" *ngIf="this.userService.getRoleFromLocalStorage() == 'Admin'">
+    <app-create-material [moduelId]="moduleId"></app-create-material>
+  </div>
 </div>
