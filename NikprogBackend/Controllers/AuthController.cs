@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using NextcloudApi;
 using NikprogServerClient.Data;
 using NikprogServerClient.Models.SocialTokens;
@@ -95,6 +97,17 @@ namespace NikprogServerClient.Controllers
                   });
             }
             return new JsonResult(Unauthorized());
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> getRoles()
+        {
+            //Get roles from token
+            JwtSecurityToken jwtToken =
+                new JwtSecurityTokenHandler()
+                .ReadJwtToken(Request.Headers["Authorization"]);
+            string? roleValue = jwtToken.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            return new JsonResult(new { role = roleValue });
         }
     }
 }
