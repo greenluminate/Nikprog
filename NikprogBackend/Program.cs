@@ -1,4 +1,4 @@
-using EntityFrameworkCore.Triggers;
+using ConfigurationSubstitution;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +13,12 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Configuration
+    .AddJsonFile("appsettings.json")
+    .EnableSubstitutions("%", "%").Build();
+
 var connectionString = builder.Configuration.GetConnectionString("MoniConnectionString");
+
 builder.Services.AddDbContext<NikprogDbContext>(options =>
 {
     options.UseSqlServer(connectionString)

@@ -13,6 +13,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ConfigurationSubstitutor" Version="1.5.0" />
 		<PackageReference Include="EntityFrameworkCore.Triggered" Version="3.2.2" />
 		<PackageReference Include="EntityFrameworkCore.Triggers" Version="1.2.3" />
 		<PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.7" />
