@@ -15,4 +15,9 @@ export class ModuleApiService extends NikprogApiService<Module>{
         catchError(this.handleError)
       );
   }
+
+  post(resourseUrl: string, resource: Module): any {
+    return this.httpClient.post<any>(`/${resourseUrl}`, resource, { headers: this.getHeaderWithUserToken() })
+      .subscribe(() => catchError(this.handleError));
+  }
 }

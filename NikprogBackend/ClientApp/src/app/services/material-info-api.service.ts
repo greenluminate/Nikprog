@@ -14,6 +14,11 @@ export class MaterialInfoApiService extends NikprogApiService<MaterialInfo>{
         catchError(this.handleError)
       );
   }
+
+  post(resourseUrl: string, resource: MaterialInfo): any {
+    return this.httpClient.post<any>(`/${resourseUrl}`, resource, { headers: this.getHeaderWithUserToken() })
+      .subscribe(() => catchError(this.handleError));
+  }
 }
 
 
