@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" (keyup.enter)="Create()">
   <label for="name">Name of Module</label>
   <input id="name" type="text" class="form-control" required minlength="4" [(ngModel)]="newModule.name" #name="ngModel">
   <div class="bg-danger" *ngIf="name.errors?.['minlength']">
     Name must be at least 4 characters long.
   </div>
   <br />
-  <button [disabled]="!IsSendable() || name.errors?.['minlength']" [ngStyle]="{'background-color':!IsSendable() || name.errors?.['minlength']? 'grey' : 'blue' }"
+  <button id="createBtn" [disabled]="!IsSendable() || name.errors?.['minlength']" [ngStyle]="{'background-color':!IsSendable() || name.errors?.['minlength']? 'grey' : 'blue' }"
           (click)="Create()">
     Create Module
   </button>
